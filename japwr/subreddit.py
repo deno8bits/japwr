@@ -1,6 +1,7 @@
 import requests
 import json
 from japwr.reddit import Reddit
+from japwr.post import Post
 
 
 class Subreddit:
@@ -11,7 +12,7 @@ class Subreddit:
             'User-Agent': reddit.userAgent
         }
 
-    def new(self, limit: int = 25) -> list[dict]:
+    def new(self, limit: int = 25) -> list[Post]:
         """
         Gets new posts
 
@@ -28,4 +29,8 @@ class Subreddit:
 
         req = requests.get(f'https://api.reddit.com/r/{self.name}/new', params, headers=self.headers,).json()
 
-        return req['data']['children']
+        # TODO: Error checking before this point otherwise this will fail badly
+
+        posts = [Post(item) for item in req['data']['children']]
+
+        return posts
