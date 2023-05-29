@@ -1,5 +1,4 @@
 import requests
-import json
 from japwr.reddit import Reddit
 from japwr.post import Post
 
@@ -20,9 +19,9 @@ class Subreddit:
             limit: int
 
         Returns:
-            posts: dict
+            posts: Post
         """
-        
+
         params = {
             'limit': limit
         }
