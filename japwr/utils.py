@@ -1,5 +1,6 @@
 import requests
 from requests import Response
+from japwr import error
 
 
 class ConnectionHandler:
@@ -30,5 +31,16 @@ class ConnectionHandler:
         raise Exception('Not Implemented Yet')
 
     def checkError(self, res: Response) -> None:
-        print(vars(res.headers))
+        if res.status_code != 200:
+            match res.status_code:
+                case 403:
+                    # TODO: Add a check to see if the instance is authorized to make the error messages more useful
+                    raise error.Unauthorized()
 
+                case 429:
+                    raise error.RateLimited()
+
+                case _:
+                    raise Exception(message=res.json()['message'])
+
+        return
