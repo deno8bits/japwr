@@ -38,19 +38,10 @@ class Subreddit:
         Returns:
             posts: Post
         """
-
+        # Error handling for this is implemented at the ConnectionHandler
         req = self.connHandler.get(f'https://api.reddit.com/r/{self.name}/new', limit=limit)
 
-        # TODO: Error checking before this point otherwise this will fail badly
-        try:
-            posts = [Post(item) for item in req['data']['children']]
-        except KeyError:
-            if req['error'] == 403:
-                raise japwr.error.Unauthorized()
-            else:
-                raise Exception(req['message'])
-
-        return posts
+        return [Post(item) for item in req['data']['children']]
 
 
 class MultiReddit:
@@ -63,5 +54,5 @@ class MultiReddit:
         self.connHandler = connHandler
 
     def new(self, limit: int = 25) -> dict:
-        
+
         return
