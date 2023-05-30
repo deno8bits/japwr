@@ -1,4 +1,5 @@
 import requests
+from requests import Response
 
 
 class ConnectionHandler:
@@ -17,9 +18,17 @@ class ConnectionHandler:
 
         params = self.params | kwargs
 
-        req = requests.get(url, params, headers=self.headers).json()
+        rawReq = requests.get(url, params, headers=self.headers)
+
+        self.checkError(rawReq)
+
+        req = rawReq.json()
 
         return req
 
     def post(self, url: str, *kwargs) -> dict:
         raise Exception('Not Implemented Yet')
+
+    def checkError(self, res: Response) -> None:
+        print(vars(res.headers))
+

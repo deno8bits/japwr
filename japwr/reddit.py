@@ -5,7 +5,7 @@ from japwr.classes import Subreddit, MultiReddit
 class Reddit:
     def __init__(self, userAgent: str) -> None:
         self.userAgent: str = userAgent
-        self.connHandler = ConnectionHandler({'user_agent': self.userAgent})
+        self.connHandler = ConnectionHandler({'User-Agent': self.userAgent})
 
     def subreddit(self, name) -> Subreddit:
         sub = Subreddit(self.connHandler, name)
