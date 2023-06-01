@@ -1,7 +1,3 @@
-import requests
-import json
-
-
 # TODO: This
 # Implement authentication stuff
 class Auth:
