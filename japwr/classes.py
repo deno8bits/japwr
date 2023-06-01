@@ -1,30 +1,5 @@
 from japwr.utils import ConnectionHandler
-"""
-TODO: Implement a better way of handling feeds (Subreddit, Multireddit etc.)
-ref:
-    https://www.reddit.com/dev/api#section_listings
-
-Multireddits also use /new /hot etc for its stuff so a parent class might be a good idea for handling feeds
-to avoid repeating alot of code
-"""
-
-
-class Post:
-    """
-        Post Object
-    """
-
-    # TODO: Check if there is a better way of mapping these vars
-    # This will scale poorly
-    def __init__(self, item: dict) -> None:
-        self.raw = item  # Allow viewing the raw json
-        item = item['data']  # Wierd Mapping because the json is wierd
-        self.isVideo: bool = item['is_video']
-        self.isSelf: bool = item['is_self']
-        self.title: str = item['title']
-        self.score: int = item['score']
-        self.url: str = item['url']
-        # self.author = None  # TODO: Implement a way of getting the author info in some way
+from .Classes.listingBase import ListingBase
 
 
 class Subreddit:
@@ -34,24 +9,10 @@ class Subreddit:
     def __init__(self, connHandler: ConnectionHandler, name: str):
         self.name = name
         self.connHandler = connHandler
-
-    def new(self, limit: int = 25) -> list[Post]:
-        """
-        Gets new posts
-
-        Args:
-            limit: int
-
-        Returns:
-            posts: Post
-        """
-        # Error handling for this is implemented at the ConnectionHandler
-        req = self.connHandler.get(f'https://api.reddit.com/r/{self.name}/new', limit=limit)
-
-        return [Post(item) for item in req['data']['children']]
+        self.urlBase = f'https://api.reddit.com/r/{self.name}'
 
 
-class MultiReddit:
+class MultiReddit(ListingBase):
     # TODO: Figure out how to actually interact with multireddits using the api
     # Either the API docs for this is unclear or I'm an idiot
     # refs:
@@ -86,9 +47,4 @@ class MultiReddit:
         self.username = username
         self.feedName = feedName
         self.connHandler = connHandler
-        self.urlBase = f'https://api.reddit.com/user/{username}/m/{feedName}/'
-        raise Exception('Not Implemented Yet')
-
-    def new(self, limit: int = 25) -> dict:
-
-        return
+        self.urlBase = f'https://api.reddit.com/user/{username}/m/{feedName}'
