@@ -41,6 +41,7 @@ class ConnectionHandler:
                     raise error.RateLimited()
 
                 case _:
-                    raise Exception(message=res.json()['message'])
+                    print(res.json())
+                    raise Exception(res.json()['message'])
 
         return
