@@ -1,5 +1,4 @@
-# TODO: This
-# Implement authentication stuff
+# TODO: Implement authentication stuff
 class Auth:
     def __init__(self, clientID: str, clientSecret: str) -> None:
         self.clientID = clientID
