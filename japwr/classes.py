@@ -13,7 +13,6 @@ class Subreddit:
 
 
 class MultiReddit(ListingBase):
-    # TODO: Figure out how to actually interact with multireddits using the api
     # Either the API docs for this is unclear or I'm an idiot
     # refs:
     #   https://www.reddit.com/dev/api#section_multis
