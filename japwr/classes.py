@@ -40,9 +40,9 @@ class MultiReddit(ListingBase):
     # this damned url
     #
     """
-    Creates a MultiReddit Instance
+    TODO: Do the docs here
     """
-    def __init__(self, connHandler: ConnectionHandler, username, feedName) -> None:
+    def __init__(self, connHandler: ConnectionHandler, username: str, feedName: str) -> None:
         self.username = username
         self.feedName = feedName
         self.connHandler = connHandler
