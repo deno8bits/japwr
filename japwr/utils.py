@@ -1,3 +1,4 @@
+# FIXME: Add better docs here to make future development faster
 import requests
 from requests import Response
 from japwr import error
@@ -7,6 +8,12 @@ class ConnectionHandler:
     """
     Used for interacting with the Reddit API while also specifying consistant parameters
     which allows us to not have to specify certain parameters every time we use 'request'
+
+    Examples::
+
+        conn = ConnectionHandler(header={headers here}, params={paramshere})
+        conn.get(url, {additional args})
+
     """
     def __init__(self, headers: dict, params: dict = {}) -> None:
         self.headers = {
