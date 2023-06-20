@@ -2,7 +2,7 @@ from japwr.utils import ConnectionHandler
 from .Classes.listingBase import ListingBase
 
 
-class Subreddit:
+class Subreddit(ListingBase):
     """
     Creates a Subreddit Instance
     """

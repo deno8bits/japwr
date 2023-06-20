@@ -1,6 +1,7 @@
 from japwr.utils import ConnectionHandler
 from japwr.classes import Subreddit, MultiReddit
 from japwr.auth import Auth
+from japwr.Classes.post import Post
 
 
 class Reddit:
@@ -25,7 +26,7 @@ class Reddit:
 
     def subreddit(self, name: str) -> Subreddit:
         """Initializes a subreddit object
-        
+
         Example::
 
             from japwr import Reddit
@@ -61,3 +62,28 @@ class Reddit:
         feed = MultiReddit(self.connHandler, username, feedName)
 
         return feed
+
+    def batchPosts(self, ids: list[str]) -> list[Post]:
+        # FIXME: Should fold this in under ListingBase class but was lazy so just rewrote it here
+        """Returns a Post item for each id in the list
+
+        Should be used to get a list of individual posts instead of using Post class multiple times
+
+        Args:
+            ids (list[str]): List of post ids
+
+        Returns:
+            list[Post]: List of Post items
+
+        See Also:
+            https://www.reddit.com/dev/api/#GET_by_id_{names}
+        """
+        ids = [f't3_{i}' for i in ids]
+
+        url = "https://api.reddit.com/by_id/" + ",".join(ids)
+
+        posts = self.connHandler.get(url)["data"]["children"]
+
+        posts = [Post(itemDict=post) for post in posts]
+
+        return posts
