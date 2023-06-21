@@ -87,3 +87,23 @@ class Reddit:
         posts = [Post(itemDict=post) for post in posts]
 
         return posts
+
+    def post(self, id: str) -> Post:
+        """Creates a post object
+
+        Args:
+            id (str): id of the post
+
+        Returns:
+            Post: Single Post
+
+        See Also:
+            https://www.reddit.com/dev/api/#GET_by_id_{names}
+        """
+        id = f't3_{id}'
+
+        url = f"https://api.reddit.com/by_id/{id}"
+
+        posts = self.connHandler.get(url)["data"]["children"]
+
+        return Post(itemDict=posts[0])
