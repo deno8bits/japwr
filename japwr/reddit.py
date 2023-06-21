@@ -19,7 +19,7 @@ class Reddit:
         params = {}
         if clientID and clientSecret:
             auth = Auth(clientID, clientSecret)
-            params = params | auth.getParams
+            params = params | auth.getParams()
         self.userAgent: str = userAgent
 
         self.connHandler = ConnectionHandler(headers, params)
@@ -64,7 +64,7 @@ class Reddit:
         return feed
 
     def batchPosts(self, ids: list[str]) -> list[Post]:
-        # FIXME: Should fold this in under ListingBase class but was lazy so just rewrote it here
+        # TODO: Should fold this in under ListingBase class but was lazy so just rewrote it here
         """Returns a Post item for each id in the list
 
         Should be used to get a list of individual posts instead of using Post class multiple times
