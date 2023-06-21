@@ -18,7 +18,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
         """
         Used to get post from a specified place
         """
@@ -34,7 +34,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
         """
         Alias for getPosts
         """
@@ -47,7 +47,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('hot', timeFrame, limit, before, after, count)
 
@@ -57,7 +57,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('new', timeFrame, limit, before, after, count)
 
@@ -67,7 +67,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('random', timeFrame, limit, before, after, count)
 
@@ -77,7 +77,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('rising', timeFrame, limit, before, after, count)
 
@@ -87,7 +87,7 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('top', timeFrame, limit, before, after, count)
 
@@ -97,6 +97,6 @@ class ListingBase:
             limit: int = 25,
             before: str = None,
             after: str = None,
-            count: int = 0) -> dict[Post]:
+            count: int = 0) -> list[Post]:
 
         return self.getPosts('controversial', timeFrame, limit, before, after, count)
